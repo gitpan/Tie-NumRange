@@ -1,6 +1,6 @@
 package Tie::NumRange;
 
-$VERSION = '0.02';
+$VERSION = '0.021';
 
 
 sub TIESCALAR {

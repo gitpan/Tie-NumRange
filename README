@@ -21,18 +21,37 @@ SYNOPSIS
       
       $positive = 2**16;  # ok
       $positive = 0;      # $pos is 1
+      
+      
+      tie my($wrap), Tie::NumRange::Wrap => (
+        0,   # initial
+        0,   # min
+        10,  # max
+      );
+      
+      while ($wrap < 10) {
+        # 0, 3, 6, 9, 2, 5, 8, 1, 4, 7
+        $wrap += 3;
+      }
 
 DESCRIPTION
     This module institutes a range of values for a number. The lower
     and upper bounds can be unlimited by passing `undef' in their
     place.
 
-  Constructor
+  `Tie::NumRange' Constructor
 
       tie $number, Tie::NumRange => ($init, $min, $max);
 
-    If `$min' is undef, the number has no lower bound. Likewise for
-    `$max'.
+    If `$min' is `undef', the number has no lower bound. Likewise
+    for `$max'.
+
+  `Tie::NumRange::Wrap' Constructor
+
+      tie $number, Tie::NumRange::Wrap => ($init, $min, $max);
+
+    Neither range can be `undef'. The value will wrap around when it
+    goes outside the stated bounds.
 
 AUTHOR
       Jeff "japhy" Pinyan
