@@ -6,7 +6,7 @@
 # Change 1..1 below to 1..last_test_to_print .
 # (It may become useful if the test is moved to ./t subdirectory.)
 
-BEGIN { $| = 1; print "1..7\n"; }
+BEGIN { $| = 1; print "1..8\n"; }
 END {print "not ok 1\n" unless $loaded;}
 use Tie::NumRange;
 $loaded = 1;
@@ -41,3 +41,11 @@ for ([$r,0], [$g,50], [$b,105]) {
   print "not " if $_->[0] != $_->[1];
   print "ok ", ++$loaded, "\n";
 }
+
+tie my($w), Tie::NumRange::Wrap => (0, 0, 10);
+
+my $str;
+$str .= $w, $w += 3 while $w != 10;
+
+print "not " if $str ne "0369258147";
+print "ok ", ++$loaded, "\n";
